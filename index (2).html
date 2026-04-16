@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Raasa Bakery – Celebrate the Little Things</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<a class="nav-logo" onclick="showPage('home')">
+  <img src="images/logo.png" class="nav-logo-img">
+  <span class="nav-logo-text">RAASA</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
+    <li><a href="#" onclick="scrollToSection('categories');return false;">Shop</a></li>
+    <li><a href="#" onclick="scrollToSection('workshops');return false;">Workshops</a></li>
+    <li><a href="#" onclick="scrollToSection('about');return false;">About</a></li>
+    <li><a href="https://wa.me/918147381301" target="_blank">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="cart-btn" onclick="toggleCart()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="hamburger" onclick="toggleMobileMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+<!-- CART DRAWER -->
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h2>Your Cart</h2>
+    <button class="close-cart" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItemsList"></div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total</span>
+      <span class="cart-total-amount" id="cartTotalDisplay">₹0</span>
+    </div>
+    <button class="checkout-btn" onclick="goCheckout()">Proceed to Checkout</button>
+    <button class="wa-btn" onclick="orderWhatsApp()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Order via WhatsApp
+    </button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ══════════ HOME PAGE ══════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-eyebrow">Bengaluru's Favourite Home Bakery</span>
+    <div class="hero-logo-circle">
+  <img src="images/logo.png" class="hero-logo-img">
+    </div>
+    <h1>Celebrate<br/><em>The Little Things</em></h1>
+    <p class="hero-sub">Handcrafted bento cakes, cheesecakes & cupcakes made with love in Bengaluru. Every bite tells a story.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="scrollToSection('categories')">
+  Shop Now
+</button>
+      <a class="btn-secondary" href="https://wa.me/918147381301" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Order on WhatsApp
+      </a>
+    </div>
+    <div class="hero-scroll">Explore</div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="categories-section" id="categories">
+    <div class="section-header">
+      <p class="section-label">What We Make</p>
+      <h2 class="section-title">Our <em>Sweet Creations</em></h2>
+    </div>
+    <div class="categories-grid">
+      <div class="category-card" onclick="showCategory('bento')">
+        <div class="category-card-bg" style="background-image: url(images/mango-bento.png);"></div>
+        <div class="category-card-content">
+          <div class="category-name">Bento Cakes</div>
+          <div class="category-count">6 Flavours · Customizable</div>
+        </div>
+      </div>
+      <div class="category-card" onclick="showCategory('cheesecake')">
+        <div class="category-card-bg" style="background-image: url(images/strawberry-cheesecake.png);"></div>
+        <div class="category-card-content">
+          <div class="category-name">Cheesecakes</div>
+          <div class="category-count">5 Flavours + Seasonal</div>
+        </div>
+      </div>
+      <div class="category-card" onclick="showCategory('brownie')">
+        <div class="category-card-bg" style="background-image: url(images/brownie-box-6.png);"></div>
+        <div class="category-card-content">
+          <div class="category-name">Brownie Boxes</div>
+          <div class="category-count">Box of 6 or 12</div>
+        </div>
+      </div>
+      <div class="category-card" onclick="showCategory('cupcake')">
+        <div class="category-card-bg" style="background-image: url(images/chocolate-cupcake.png);"></div>
+        <div class="category-card-content">
+          <div class="category-name">Cupcakes</div>
+          <div class="category-count">Multiple Flavours · Customizable</div>
+        </div>
+      </div>
+      <div class="category-card" onclick="showCategory('banana')">
+        <div class="category-card-bg" style="background-image: url(images/banana-bread.png);"></div>
+        <div class="category-card-content">
+          <div class="category-name">Banana Treats</div>
+          <div class="category-count">Muffins & Banana Bread</div>
+        </div>
+      </div>
+      <div class="category-card" onclick="showCategory('pastry')">
+        <div class="category-card-bg" style="background-image: url(images/chocolate-truffle-pastry.png);"></div>
+        <div class="category-card-content">
+          <div class="category-name">Pastries</div>
+          <div class="category-count">6 Flavours · Customizable</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKSHOPS -->
+  <section class="workshops-section" id="workshops">
+    <div class="section-header">
+      <p class="section-label workshops-label">Experience</p>
+      <h2 class="section-title workshops-title">Sip & <em>Frost</em> Workshops</h2>
+    </div>
+    <div class="workshop-card">
+      <div>
+        <p class="workshop-title">Decorate Your Own Bento Cake</p>
+        <p class="workshop-price">₹2,200 <span class="workshop-price-sub">/ person</span></p>
+        <p class="workshop-desc">Join us on Sundays at Bengaluru's most aesthetic venues — The Scene, 1131, and Indian Biere House — for a hands-on bento cake decorating experience.</p>
+        <ul class="workshop-includes">
+          <li>Pre-baked cake layers included</li>
+          <li>Turntables & professional tools</li>
+          <li>Cream, fillings & food colours</li>
+          <li>Welcome kit: apron, recipe card & gift</li>
+          <li>One complimentary drink of your choice</li>
+          <li>Bookings open every Sunday</li>
+        </ul>
+        <button class="workshop-btn" onclick="bookWorkshop()">Book Your Spot</button>
+      </div>
+      <div class="workshop-img-block">
+        <img src="images/bento cake workshop.jpg" alt="Bento cake workshop" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about-outer">
+    <div class="about-section">
+      <div class="about-img">
+        <img src="images/baker at work.jpeg" alt="Baker at work" />
+      </div>
+      <div>
+        <p class="about-label">The Story Behind Raasa</p>
+        <h2 class="about-title">Born from Passion, Made with Love</h2>
+        <p class="about-text">
+          Raasa Bakery was founded by Surabhi H N, a self-taught baker and BMS College of Engineering graduate who turned her lifelong love for baking into a beautiful creative venture. In Sanskrit, <em>Raasa</em> means "essence" — the most vital and enjoyable part of something. Every cake, cheesecake, and cupcake we make carries that essence.
+          <br/><br/>
+          We specialize in vegetarian, eggless desserts crafted with the finest ingredients, designed to celebrate life's small, meaningful moments.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">RAASA</div>
+    <p class="footer-tag">Celebrate the Little Things</p>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('products');return false;">Shop</a>
+      <a href="#" onclick="scrollToSection('workshops');return false;">Workshops</a>
+      <a href="https://www.instagram.com/raasabakery" target="_blank">Instagram</a>
+      <a href="https://wa.me/918147381301" target="_blank">WhatsApp</a>
+      <a href="https://raasabakery.com" target="_blank">Website</a>
+    </div>
+    <p class="footer-copy">© 2025 Raasa Bakery · Bengaluru · All rights reserved</p>
+  </footer>
+</div>
+
+<!-- ══════════ PRODUCTS PAGE ══════════ -->
+<div class="page" id="page-products">
+  <div class="products-page">
+    <div class="products-header">
+      <button class="back-btn" onclick="showPage('home')">← Back</button>
+      <h1 id="productsPageTitle">All Products</h1>
+      <p id="productsPageSub">Browse our handcrafted collection</p>
+    </div>
+    <div class="products-body">
+      <div class="products-grid" id="productsGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PRODUCT DETAIL PAGE ══════════ -->
+<div class="page" id="page-detail">
+  <div class="product-detail-page">
+    <div class="detail-container">
+      <div>
+        <button class="back-btn detail-back-btn" id="detailBackBtn" onclick="goBackFromDetail()">← Back</button>
+        <div class="detail-img-wrap" id="detailImg"></div>
+      </div>
+      <div class="detail-info">
+        <p class="detail-category" id="detailCategory"></p>
+        <h1 class="detail-name" id="detailName"></h1>
+        <p class="detail-price" id="detailPrice"></p>
+        <p class="detail-desc" id="detailDesc"></p>
+        <p class="qty-label">Quantity</p>
+        <div class="qty-selector">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <span class="qty-num" id="qtyNum">1</span>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+        <div id="detailActions"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CHECKOUT PAGE ══════════ -->
+<div class="page" id="page-checkout">
+  <div class="checkout-page">
+    <div class="checkout-container">
+      <div class="checkout-form-section">
+        <button class="back-btn" onclick="toggleCart()" style="margin-bottom:20px;">← Back to Cart</button>
+        <h2>Complete Your Order</h2>
+
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="co-name" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="co-phone" placeholder="+91 XXXXX XXXXX" />
+        </div>
+        <div class="form-group">
+          <label>Delivery Address</label>
+          <textarea id="co-address" placeholder="Full address with pincode"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Special Instructions (optional)</label>
+          <textarea id="co-notes" placeholder="Allergies, occasion, message on cake..."></textarea>
+        </div>
+
+        <p class="qty-label payment-label">Payment Method</p>
+        <div class="payment-methods">
+          <label class="pay-option selected" id="pay-upi">
+            <input type="radio" name="payment" value="upi" checked onchange="selectPay(this)"/>
+            <span class="pay-option-icon">📱</span>
+            <span class="pay-option-label">UPI (Google Pay, PhonePe, Paytm)</span>
+          </label>
+          <label class="pay-option" id="pay-card">
+            <input type="radio" name="payment" value="card" onchange="selectPay(this)"/>
+            <span class="pay-option-icon">💳</span>
+            <span class="pay-option-label">Credit / Debit Card</span>
+          </label>
+          <label class="pay-option" id="pay-wa">
+            <input type="radio" name="payment" value="whatsapp" onchange="selectPay(this)"/>
+            <span class="pay-option-icon">💬</span>
+            <span class="pay-option-label">Pay via WhatsApp Order</span>
+          </label>
+        </div>
+
+        <button class="place-order-btn" onclick="placeOrder()">Place Order →</button>
+      </div>
+
+      <div class="checkout-summary">
+        <h3>Order Summary</h3>
+        <div id="checkoutItems"></div>
+        <div class="summary-total">
+          <span>Total</span>
+          <span class="summary-total-val" id="checkoutTotal">₹0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SUCCESS PAGE ══════════ -->
+<div class="page" id="page-success">
+  <div class="success-screen">
+    <div class="success-icon">
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="32" fill="#c9896a" opacity="0.15"/><circle cx="32" cy="32" r="24" fill="#c9896a" opacity="0.2"/><path d="M20 32l8 8 16-16" stroke="#c9896a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h1 class="success-title">Order Placed!</h1>
+    <p class="success-sub">Thank you! Your order has been received. Surabhi will reach out shortly to confirm your sweet treats.</p>
+    <button class="btn-primary" onclick="showPage('home')">Back to Home</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
